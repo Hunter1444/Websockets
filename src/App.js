@@ -10,7 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import io from 'socket.io-client';
 import './App.css';
-import { endpoint, wss } from "./config";
+import { endpoint } from "./config";
 
 const Container = styled.div`
     width: 500px;
@@ -28,7 +28,7 @@ const getUuid = () => {
     return id
 };
 
-const socket = io('http://localhost:3007');
+const socket = io(endpoint);
 
 class App extends Component {
     state = {

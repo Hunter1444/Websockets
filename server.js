@@ -22,17 +22,15 @@ app.get('/get-messages', function (req, res) {
     getMessages(res);
 });
 
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://admin:414175akk@ds239873.mlab.com:39873/maxim-database';
 
 function sendMessage(msg) {
     MongoClient.connect(url, function(err, client) {
-        // Use the admin database for the operation
-        const db = client.db('CHAT_HISTORY');
-        const collection = db.collection("ANON_HISTORY");
-        collection.insertOne(msg, function(err){
-            if(err){
-                return console.log(err);
-            }
+        assert.equal(null, err);
+        console.log("Connected successfully to server sendMessage");
+        const db = client.db('maxim-database');
+        const collection = db.collection("CHAT_HISTORY");
+        collection.insertOne(msg, function(){
             client.close();
         });
     });
@@ -40,15 +38,15 @@ function sendMessage(msg) {
 
 function getMessages(res) {
     MongoClient.connect(url, function(err, client) {
-        // Use the admin database for the operation
-        const db = client.db('CHAT_HISTORY');
-        const collection = db.collection("ANON_HISTORY");
-        let returnedValue;
+        assert.equal(null, err);
+        console.log("Connected successfully to server getMessage");
+
+        const db = client.db('maxim-database');
+        const collection = db.collection("CHAT_HISTORY");
         collection.find({}).toArray(function(err, docs) {
-            assert.equal(err, null);
+            console.log(docs);
             res.send(docs);
             client.close();
         });
-        return returnedValue;
     });
 }

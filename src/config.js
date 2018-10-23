@@ -1,4 +1,3 @@
-const endpoint = 'http://localhost:3007';
-const wss = 'wss://localhost:8080';
+const endpoint = 'https://youthful-jepsen-416169.netlify.com:3007';
 
-export { endpoint, wss }
+export { endpoint }
